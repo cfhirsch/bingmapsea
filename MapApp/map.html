@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type='text/javascript'
+            src='http://www.bing.com/api/maps/mapcontrol?callback=GetMap'
+            async defer></script>
+
+    <script type="text/javascript">
+        var key = "ArTL45SDeNEEpZKTDiYerlb_VECitBTORuvHBNK2cYcVqfL3UzbDErUSiuG9S_j9";
+
+        function GetMap() {
+            map = new Microsoft.Maps.Map('#myMap', {
+                credentials: key
+            });
+
+            var restUrl = "http://dev.virtualearth.net/REST/v1/Locations?culture=en-US&addressLine=S%20Orcas%20St%20and%2052nd%20Ave%20S&o=xml&key=" + key;
+
+            var locations = [
+                ['NW Market St & 20th Ave NW', 47.66867, -122.38184],
+                ['24th Ave NW & NW 67th ST', 25.83547, -80.23725],
+                ['24th Ave NW & NW 77th St', 25.84451, -80.23742],
+                ['9 W McGraw', 42.449787623584, -76.4879500392453],
+                ['Queen Anne Ave & W Comstock', 47.630445, -122.35676],
+                ['Queen Anne Ave N & W Harrison St', 47.62211, -122.35673],
+                ['2nd Ave & Cedar St', 43.31651, -87.96352],
+                ['19th Ave E & E Harrison St', 39.75869, -75.54804],
+                ['16h Ave E & E Thomas St', 36.50885, -86.86652],
+                ['E Pike St & Summit Ave', 39.98148, -75.358515],
+                ['S Orcas St and 52nd Ave S', 47.55116, -122.26724],
+                ['S McClellan St and S Mt Baker Blvd', 47.57835, -122.28847],
+                ['N 36th St & Phinney Ave N', 47.65224, -122.35448],
+                ['N 35th St & Woodland Park Ave N', 47.64963, -122.34404],
+                ['Stone Way N & N 45th St', 47.661215, -122.342315],
+                ['N 45th St & Bagley Ave N', 47.66138, -122.33254],
+                ['NE 65th Ave & 39th Ave NE', 48.35433, -99.04914],
+                ['35th Ave NE & NE 73rd St', 47.681165, -122.29043],
+                ['35th Ave NE & NE 80th St', 47.68666, -122.29062],
+                ['Leschi Park', 47.601780, -122.287041],
+                ['E Madison St & 23rd Ave', 40.74089, -73.98805],
+                ['City People\'s Nursery',40.9375294457023,-124.103271469501],
+                ['Covington Cornerstone Church', 33.6754969449007, -83.9823664389744],
+                    ['Kent Seventh Day Adventist Church', 63.697470000007, -170.462875000048],
+                    ['Evergreen State Fairgrounds', 30.326905000046, -81.6422500003987],
+                    ['Greenwood Ave N & N 73rd St', 47.68183, -122.35532],
+                    ['Phinney Ave N & N Argle PL', 47.66913, -122.3544],
+                    ['NE 65th St & Latona Ave NE', 47.67591, -122.32558],
+                    ['Cedar Park Crescent NE and NE 100th Way', 47.68812, -122.04163],
+                    ['NE Cedar Park Crescent & Eastridge DR NE', 47.69153, -122.016885],
+                    ['Times Square Complex', 40.7566299629453, -73.986275026657],
+                    ['Highlands Community Church', 37.9363922990827, -75.360753818581],
+                    ['Christian Faith Center Everett', 36.7513655413621, -86.1724724606199],
+                    ['Mars Hill Church Sammamish', 34.0192000383173, -84.6822414275768],
+                    ['Trailside Building Snoqualmie', 47.52537, -121.87149],
+                    ['Issaquah Highlands', 47.5472083524431, -122.020196805696],
+                    ['California Ave SW @ Admiral Theater', 47.581285, -122.386555],
+                    ['California AVE SW & SW Spokane ST', 47.572035, -122.38676],
+                    ['West Seattle Christian Church', 35.8997197675947, -87.347498604875],
+                    ['Our Redeemers Lutheran Church', 47.6908, -122.38822],
+                    ['Bothell Staples', 47.76125, -122.17541],
+                    ['S Genesee St and 43rd Ave S', 47.56408, -122.2795],
+                    ['Holy innocents Catholic Church', 47.74105, -121.98224],
+                    ['Wallingford Ave N & N 34th St', 47.64805, -122.33635],
+                    ['40th Ave N & NE 55th St', 47.6685, -122.28483],
+                    ['E Cherry St & 16th Ave', 47.60804, -122.311485],
+                    ['E Union St and 34th Ave', 47.6129, -122.28931],
+                    ['Millcreek Foursquare Church', 47.8504, -122.25372],
+                    ['Redmond Ridge Carpool Lot', 47.6806523269678, -122.033152733885],
+                    ['Eastridge DR NE & Powerlines', 47.6869800000027, -122.013944999732],
+                    ['Snohomish Hope Foursquare Church', 47.95068, -122.11856]]
+
+            //Create a pushpin.
+            // map.getCenter()
+            for (var i = 0; i < locations.length; i++)
+            {
+                var location = new Microsoft.Maps.Location(locations[i][1], locations[i][2]);
+                var pushpin = new Microsoft.Maps.Pushpin(location, { title: locations[i][0] });
+                map.entities.push(pushpin);
+            }
+
+            //Add mouse events to the pushpin.
+            /*Microsoft.Maps.Events.addHandler(pushpin, 'click', function () { highlight('pushpinClick'); });
+            Microsoft.Maps.Events.addHandler(pushpin, 'mousedown', function () { highlight('pushpinMousedown'); });
+            Microsoft.Maps.Events.addHandler(pushpin, 'mouseout', function () { highlight('pushpinMouseout'); });
+            Microsoft.Maps.Events.addHandler(pushpin, 'mouseover', function () { highlight('pushpinMouseover'); });
+            Microsoft.Maps.Events.addHandler(pushpin, 'mouseup', function () { highlight('pushpinMouseup'); });*/
+        }
+
+        function highlight(id) {
+            //Highlight the mouse event div to indicate that the event has fired.
+            document.getElementById(id).style.background = 'LightGreen';
+
+            //Remove the highlighting after a second.
+            setTimeout(function () { document.getElementById(id).style.background = 'white'; }, 1000);
+        }
+    </script>
+</head>
+<body>
+    <div id="myMap" style="position:relative;width:800px;height:600px;"></div>
+
+    <div id="pushpinClick">click</div>
+    <div id="pushpinMousedown">mousedown</div>
+    <div id="pushpinMouseout">mouseout</div>
+    <div id="pushpinMouseover">mouseover</div>
+    <div id="pushpinMouseup">mouseup</div>
+</body>
+</html>
